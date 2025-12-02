@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas - Gerenciamento de Cursos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="header">
+        <h1>Gerenciamento de Notas</h1>
+        <div>
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}">Sair</a>
+        </div>
+    </div>
+    <div class="container">
+        <div th:if="${success}" class="success" th:text="${success}"></div>
+        <div style="margin-bottom: 20px;">
+            <a th:href="@{/notas/novo}" class="btn btn-primary">Nova Nota</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Aluno</th>
+                    <th>Curso</th>
+                    <th>Valor</th>
+                    <th>Tipo</th>
+                    <th>Data</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="nota : ${notas}">
+                    <td th:text="${nota.id}"></td>
+                    <td th:text="${#lists.contains(alunos, nota.alunoId) ? alunos[#lists.indexOf(alunos, nota.alunoId)].nome : nota.alunoId}"></td>
+                    <td th:text="${#lists.contains(cursos, nota.cursoId) ? cursos[#lists.indexOf(cursos, nota.cursoId)].nome : nota.cursoId}"></td>
+                    <td th:text="${nota.valor}"></td>
+                    <td th:text="${nota.tipoAvaliacao}"></td>
+                    <td th:text="${nota.dataAvaliacao}"></td>
+                    <td th:text="${nota.observacoes}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,648 @@
+{
+	"info": {
+		"_postman_id": "gerenciamento-cursos-api",
+		"name": "Gerenciamento de Cursos API",
+		"description": "Collection completa da API de Gerenciamento de Cursos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"admin\",\n    \"senha\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "login"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Listar Usuários",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "usuarios"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Usuário por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "usuarios", "1"]
+						}
+					}
+				},
+				{
+					"name": "Criar Usuário",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"novousuario\",\n    \"senha\": \"senha123\",\n    \"nome\": \"Novo Usuário\",\n    \"email\": \"novo@example.com\",\n    \"role\": \"ALUNO\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "usuarios"]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Usuário",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"novousuario\",\n    \"senha\": \"senha123\",\n    \"nome\": \"Usuário Atualizado\",\n    \"email\": \"atualizado@example.com\",\n    \"role\": \"PROFESSOR\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "usuarios", "1"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "usuarios", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Alunos",
+			"item": [
+				{
+					"name": "Listar Alunos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/alunos",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "alunos"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Aluno por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/alunos/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "alunos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Criar Aluno",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João Silva\",\n    \"email\": \"joao@example.com\",\n    \"cpf\": \"123.456.789-00\",\n    \"telefone\": \"(11) 99999-9999\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/alunos",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "alunos"]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Aluno",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João Silva Atualizado\",\n    \"email\": \"joao.atualizado@example.com\",\n    \"cpf\": \"123.456.789-00\",\n    \"telefone\": \"(11) 88888-8888\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/alunos/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "alunos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Aluno",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/alunos/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "alunos", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Cursos",
+			"item": [
+				{
+					"name": "Listar Cursos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/cursos",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cursos"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Curso por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/cursos/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cursos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Criar Curso",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Java Avançado\",\n    \"descricao\": \"Curso avançado de Java\",\n    \"cargaHoraria\": 80,\n    \"dataInicio\": \"2024-01-01\",\n    \"dataFim\": \"2024-04-01\",\n    \"status\": \"ATIVO\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cursos",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cursos"]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Curso",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Java Avançado Atualizado\",\n    \"descricao\": \"Curso atualizado\",\n    \"cargaHoraria\": 100,\n    \"dataInicio\": \"2024-01-01\",\n    \"dataFim\": \"2024-05-01\",\n    \"status\": \"ATIVO\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cursos/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cursos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Curso",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/cursos/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cursos", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Notas",
+			"item": [
+				{
+					"name": "Listar Notas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notas",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notas"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Nota por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notas/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notas", "1"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Notas por Aluno",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notas/aluno/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notas", "aluno", "1"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Notas por Curso",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notas/curso/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notas", "curso", "1"]
+						}
+					}
+				},
+				{
+					"name": "Criar Nota",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"alunoId\": 1,\n    \"cursoId\": 1,\n    \"valor\": 8.5,\n    \"tipoAvaliacao\": \"PROVA\",\n    \"dataAvaliacao\": \"2024-01-15T10:00:00\",\n    \"observacoes\": \"Bom desempenho\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/notas",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notas"]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Nota",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"alunoId\": 1,\n    \"cursoId\": 1,\n    \"valor\": 9.0,\n    \"tipoAvaliacao\": \"PROVA\",\n    \"dataAvaliacao\": \"2024-01-15T10:00:00\",\n    \"observacoes\": \"Excelente desempenho\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/notas/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notas", "1"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Nota",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notas/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notas", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Sessões",
+			"item": [
+				{
+					"name": "Listar Sessões",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/sessions",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "sessions"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Sessão por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/sessions/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "sessions", "1"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Sessões por Aluno",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/sessions/aluno/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "sessions", "aluno", "1"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Sessões por Curso",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/sessions/curso/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "sessions", "curso", "1"]
+						}
+					}
+				},
+				{
+					"name": "Criar Sessão",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"alunoId\": 1,\n    \"cursoId\": 1,\n    \"dataSessao\": \"2024-01-20T14:00:00\",\n    \"conteudo\": \"Introdução ao Spring Boot\",\n    \"duracaoMinutos\": 60,\n    \"status\": \"AGENDADA\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/sessions",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "sessions"]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Sessão",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"alunoId\": 1,\n    \"cursoId\": 1,\n    \"dataSessao\": \"2024-01-20T14:00:00\",\n    \"conteudo\": \"Spring Boot Avançado\",\n    \"duracaoMinutos\": 90,\n    \"status\": \"REALIZADA\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/sessions/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "sessions", "1"]
+						}
+					}
+				},
+				{
+					"name": "Deletar Sessão",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/sessions/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "sessions", "1"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
+

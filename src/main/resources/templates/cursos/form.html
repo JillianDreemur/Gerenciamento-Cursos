@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${curso.id != null ? 'Editar Curso' : 'Novo Curso'}">Formulário Curso</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="header">
+        <h1 th:text="${curso.id != null ? 'Editar Curso' : 'Novo Curso'}">Formulário</h1>
+        <a th:href="@{/cursos}">Voltar</a>
+    </div>
+    <div class="container">
+        <form th:action="${curso.id != null ? '/cursos/' + curso.id : '/cursos'}" 
+              th:object="${curso}" method="post" class="form">
+            <div class="form-group">
+                <label>Nome:</label>
+                <input type="text" th:field="*{nome}" required>
+            </div>
+            <div class="form-group">
+                <label>Descrição:</label>
+                <textarea th:field="*{descricao}" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Carga Horária:</label>
+                <input type="number" th:field="*{cargaHoraria}">
+            </div>
+            <div class="form-group">
+                <label>Data Início:</label>
+                <input type="date" th:field="*{dataInicio}">
+            </div>
+            <div class="form-group">
+                <label>Data Fim:</label>
+                <input type="date" th:field="*{dataFim}">
+            </div>
+            <div class="form-group">
+                <label>Status:</label>
+                <select th:field="*{status}">
+                    <option value="ATIVO">ATIVO</option>
+                    <option value="INATIVO">INATIVO</option>
+                    <option value="CONCLUIDO">CONCLUIDO</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>
+

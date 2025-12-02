@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Sessão</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="header">
+        <h1>Nova Sessão</h1>
+        <a th:href="@{/sessions}">Voltar</a>
+    </div>
+    <div class="container">
+        <form th:action="@{/sessions}" th:object="${session}" method="post" class="form">
+            <div class="form-group">
+                <label>Aluno:</label>
+                <select th:field="*{alunoId}" required>
+                    <option value="">Selecione um aluno</option>
+                    <option th:each="aluno : ${alunos}" th:value="${aluno.id}" th:text="${aluno.nome}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Curso:</label>
+                <select th:field="*{cursoId}" required>
+                    <option value="">Selecione um curso</option>
+                    <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.nome}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Data da Sessão:</label>
+                <input type="datetime-local" th:field="*{dataSessao}" required>
+            </div>
+            <div class="form-group">
+                <label>Duração (minutos):</label>
+                <input type="number" th:field="*{duracaoMinutos}">
+            </div>
+            <div class="form-group">
+                <label>Status:</label>
+                <select th:field="*{status}">
+                    <option value="AGENDADA">AGENDADA</option>
+                    <option value="REALIZADA">REALIZADA</option>
+                    <option value="CANCELADA">CANCELADA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Conteúdo:</label>
+                <textarea th:field="*{conteudo}" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alunos - Gerenciamento de Cursos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="header">
+        <h1>Gerenciamento de Alunos</h1>
+        <div>
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}">Sair</a>
+        </div>
+    </div>
+    <div class="container">
+        <div th:if="${success}" class="success" th:text="${success}"></div>
+        <div style="margin-bottom: 20px;">
+            <a th:href="@{/alunos/novo}" class="btn btn-primary">Novo Aluno</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aluno : ${alunos}">
+                    <td th:text="${aluno.id}"></td>
+                    <td th:text="${aluno.nome}"></td>
+                    <td th:text="${aluno.email}"></td>
+                    <td th:text="${aluno.cpf}"></td>
+                    <td th:text="${aluno.telefone}"></td>
+                    <td>
+                        <a th:href="@{/alunos/{id}/editar(id=${aluno.id})}" class="btn btn-sm">Editar</a>
+                        <a th:href="@{/alunos/{id}/deletar(id=${aluno.id})}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza?')">Deletar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

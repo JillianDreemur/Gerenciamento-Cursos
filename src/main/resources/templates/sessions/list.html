@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessões - Gerenciamento de Cursos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="header">
+        <h1>Gerenciamento de Sessões</h1>
+        <div>
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}">Sair</a>
+        </div>
+    </div>
+    <div class="container">
+        <div th:if="${success}" class="success" th:text="${success}"></div>
+        <div style="margin-bottom: 20px;">
+            <a th:href="@{/sessions/novo}" class="btn btn-primary">Nova Sessão</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Aluno</th>
+                    <th>Curso</th>
+                    <th>Data Sessão</th>
+                    <th>Duração (min)</th>
+                    <th>Status</th>
+                    <th>Conteúdo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="session : ${sessions}">
+                    <td th:text="${session.id}"></td>
+                    <td th:text="${session.alunoId}"></td>
+                    <td th:text="${session.cursoId}"></td>
+                    <td th:text="${session.dataSessao}"></td>
+                    <td th:text="${session.duracaoMinutos}"></td>
+                    <td th:text="${session.status}"></td>
+                    <td th:text="${session.conteudo}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
