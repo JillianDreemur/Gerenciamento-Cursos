@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS notas (
     curso_id BIGINT NOT NULL,
     valor DOUBLE PRECISION NOT NULL,
     tipo_avaliacao VARCHAR(50),
-    data_avaliacao TIMESTAMP,
+    data_avaliacao DATE,
     observacoes TEXT,
     FOREIGN KEY (aluno_id) REFERENCES alunos(id) ON DELETE CASCADE,
     FOREIGN KEY (curso_id) REFERENCES cursos(id) ON DELETE CASCADE

@@ -2,9 +2,11 @@ package appGerente.GerenciamentoCursos.services;
 
 import appGerente.GerenciamentoCursos.dao.CursoDAO;
 import appGerente.GerenciamentoCursos.models.Curso;
+import appGerente.GerenciamentoCursos.utils.FormatadorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -12,6 +14,9 @@ public class CursoService {
 
     @Autowired
     private CursoDAO cursoDAO;
+
+    private static final LocalDate DATA_MINIMA = LocalDate.of(2010, 1, 1);
+    private static final LocalDate DATA_MAXIMA = LocalDate.now();
 
     public List<Curso> findAll() {
         return cursoDAO.findAll();
@@ -22,19 +27,58 @@ public class CursoService {
                 .orElseThrow(() -> new RuntimeException("Curso não encontrado com id: " + id));
     }
 
-    public Curso save(Curso curso) {
-        if (curso.getNome() == null || curso.getNome().isEmpty()) {
+    /**
+     * Formata e valida os dados do curso antes de salvar
+     */
+    private void formatarEValidarCurso(Curso curso) {
+        // Validação e formatação do nome
+        if (curso.getNome() == null || curso.getNome().trim().isEmpty()) {
             throw new RuntimeException("Nome é obrigatório");
         }
+        curso.setNome(FormatadorUtil.formatarNome(curso.getNome()));
+
+        // Validação de data de início
+        if (curso.getDataInicio() != null) {
+            if (curso.getDataInicio().isBefore(DATA_MINIMA)) {
+                throw new IllegalArgumentException("Data de início não pode ser anterior a 01/01/2010");
+            }
+            if (curso.getDataInicio().isAfter(DATA_MAXIMA)) {
+                throw new IllegalArgumentException("Data de início não pode ser maior que a data atual");
+            }
+        }
+
+        // Validação de data de fim
+        if (curso.getDataFim() != null) {
+            if (curso.getDataFim().isBefore(DATA_MINIMA)) {
+                throw new IllegalArgumentException("Data de fim não pode ser anterior a 01/01/2010");
+            }
+            if (curso.getDataFim().isAfter(DATA_MAXIMA)) {
+                throw new IllegalArgumentException("Data de fim não pode ser maior que a data atual");
+            }
+        }
+
+        // Validação: data de fim deve ser após data de início
+        if (curso.getDataInicio() != null && curso.getDataFim() != null) {
+            if (curso.getDataFim().isBefore(curso.getDataInicio())) {
+                throw new IllegalArgumentException("Data de fim deve ser posterior à data de início");
+            }
+        }
+
+        // Status padrão
         if (curso.getStatus() == null || curso.getStatus().isEmpty()) {
             curso.setStatus("ATIVO");
         }
+    }
+
+    public Curso save(Curso curso) {
+        formatarEValidarCurso(curso);
         return cursoDAO.save(curso);
     }
 
     public Curso update(Long id, Curso curso) {
         Curso existing = findById(id);
         curso.setId(existing.getId());
+        formatarEValidarCurso(curso);
         return cursoDAO.save(curso);
     }
 

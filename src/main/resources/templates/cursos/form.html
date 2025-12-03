@@ -28,11 +28,16 @@
             </div>
             <div class="form-group">
                 <label>Data Início:</label>
-                <input type="date" th:field="*{dataInicio}">
+                <input type="date" th:field="*{dataInicio}" 
+                       th:min="${dataMinima}" 
+                       th:max="${dataAtual}" 
+                       required>
             </div>
             <div class="form-group">
                 <label>Data Fim:</label>
-                <input type="date" th:field="*{dataFim}">
+                <input type="date" th:field="*{dataFim}" 
+                       th:min="${dataMinima}" 
+                       th:max="${dataAtual}">
             </div>
             <div class="form-group">
                 <label>Status:</label>

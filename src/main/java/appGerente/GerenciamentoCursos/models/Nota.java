@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +15,7 @@ public class Nota {
     private Long cursoId;
     private Double valor;
     private String tipoAvaliacao; // PROVA, TRABALHO, PROJETO
-    private LocalDateTime dataAvaliacao;
+    private LocalDate dataAvaliacao;
     private String observacoes;
 }
 

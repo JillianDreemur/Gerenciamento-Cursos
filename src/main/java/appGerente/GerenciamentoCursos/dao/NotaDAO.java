@@ -6,8 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +24,8 @@ public class NotaDAO {
         nota.setCursoId(rs.getLong("curso_id"));
         nota.setValor(rs.getDouble("valor"));
         nota.setTipoAvaliacao(rs.getString("tipo_avaliacao"));
-        Timestamp timestamp = rs.getTimestamp("data_avaliacao");
-        nota.setDataAvaliacao(timestamp != null ? timestamp.toLocalDateTime() : null);
+        Date date = rs.getDate("data_avaliacao");
+        nota.setDataAvaliacao(date != null ? date.toLocalDate() : null);
         nota.setObservacoes(rs.getString("observacoes"));
         return nota;
     };
@@ -56,7 +56,7 @@ public class NotaDAO {
             String sql = "INSERT INTO notas (aluno_id, curso_id, valor, tipo_avaliacao, data_avaliacao, observacoes) VALUES (?, ?, ?, ?, ?, ?)";
             jdbcTemplate.update(sql, nota.getAlunoId(), nota.getCursoId(), nota.getValor(),
                     nota.getTipoAvaliacao(),
-                    nota.getDataAvaliacao() != null ? Timestamp.valueOf(nota.getDataAvaliacao()) : null,
+                    nota.getDataAvaliacao() != null ? Date.valueOf(nota.getDataAvaliacao()) : null,
                     nota.getObservacoes());
             // Buscar a nota inserida
             String selectSql = "SELECT * FROM notas WHERE aluno_id = ? AND curso_id = ? ORDER BY id DESC LIMIT 1";
@@ -66,7 +66,7 @@ public class NotaDAO {
             String sql = "UPDATE notas SET aluno_id = ?, curso_id = ?, valor = ?, tipo_avaliacao = ?, data_avaliacao = ?, observacoes = ? WHERE id = ?";
             jdbcTemplate.update(sql, nota.getAlunoId(), nota.getCursoId(), nota.getValor(),
                     nota.getTipoAvaliacao(),
-                    nota.getDataAvaliacao() != null ? Timestamp.valueOf(nota.getDataAvaliacao()) : null,
+                    nota.getDataAvaliacao() != null ? Date.valueOf(nota.getDataAvaliacao()) : null,
                     nota.getObservacoes(), nota.getId());
             return nota;
         }

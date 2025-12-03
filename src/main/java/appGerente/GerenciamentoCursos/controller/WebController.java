@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -102,9 +103,17 @@ public class WebController {
 
     @PostMapping("/alunos")
     public String salvarAluno(@ModelAttribute Aluno aluno, RedirectAttributes redirectAttributes) {
-        alunoService.save(aluno);
-        redirectAttributes.addFlashAttribute("success", "Aluno salvo com sucesso!");
-        return "redirect:/alunos";
+        try {
+            alunoService.save(aluno);
+            redirectAttributes.addFlashAttribute("success", "Aluno salvo com sucesso!");
+            return "redirect:/alunos";
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/alunos/novo";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/alunos/novo";
+        }
     }
 
     @GetMapping("/alunos/{id}/editar")
@@ -119,9 +128,17 @@ public class WebController {
 
     @PostMapping("/alunos/{id}")
     public String atualizarAluno(@PathVariable Long id, @ModelAttribute Aluno aluno, RedirectAttributes redirectAttributes) {
-        alunoService.update(id, aluno);
-        redirectAttributes.addFlashAttribute("success", "Aluno atualizado com sucesso!");
-        return "redirect:/alunos";
+        try {
+            alunoService.update(id, aluno);
+            redirectAttributes.addFlashAttribute("success", "Aluno atualizado com sucesso!");
+            return "redirect:/alunos";
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/alunos/" + id + "/editar";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/alunos/" + id + "/editar";
+        }
     }
 
     @GetMapping("/alunos/{id}/deletar")
@@ -148,14 +165,24 @@ public class WebController {
             return "redirect:/login";
         }
         model.addAttribute("curso", new Curso());
+        model.addAttribute("dataAtual", LocalDate.now());
+        model.addAttribute("dataMinima", LocalDate.of(2010, 1, 1));
         return "cursos/form";
     }
 
     @PostMapping("/cursos")
     public String salvarCurso(@ModelAttribute Curso curso, RedirectAttributes redirectAttributes) {
-        cursoService.save(curso);
-        redirectAttributes.addFlashAttribute("success", "Curso salvo com sucesso!");
-        return "redirect:/cursos";
+        try {
+            cursoService.save(curso);
+            redirectAttributes.addFlashAttribute("success", "Curso salvo com sucesso!");
+            return "redirect:/cursos";
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/cursos/novo";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/cursos/novo";
+        }
     }
 
     @GetMapping("/cursos/{id}/editar")
@@ -165,14 +192,24 @@ public class WebController {
         }
         Curso curso = cursoService.findById(id);
         model.addAttribute("curso", curso);
+        model.addAttribute("dataAtual", LocalDate.now());
+        model.addAttribute("dataMinima", LocalDate.of(2010, 1, 1));
         return "cursos/form";
     }
 
     @PostMapping("/cursos/{id}")
     public String atualizarCurso(@PathVariable Long id, @ModelAttribute Curso curso, RedirectAttributes redirectAttributes) {
-        cursoService.update(id, curso);
-        redirectAttributes.addFlashAttribute("success", "Curso atualizado com sucesso!");
-        return "redirect:/cursos";
+        try {
+            cursoService.update(id, curso);
+            redirectAttributes.addFlashAttribute("success", "Curso atualizado com sucesso!");
+            return "redirect:/cursos";
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/cursos/" + id + "/editar";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/cursos/" + id + "/editar";
+        }
     }
 
     @GetMapping("/cursos/{id}/deletar")
@@ -212,9 +249,17 @@ public class WebController {
 
     @PostMapping("/notas")
     public String salvarNota(@ModelAttribute Nota nota, RedirectAttributes redirectAttributes) {
-        notaService.save(nota);
-        redirectAttributes.addFlashAttribute("success", "Nota salva com sucesso!");
-        return "redirect:/notas";
+        try {
+            notaService.save(nota);
+            redirectAttributes.addFlashAttribute("success", "Nota salva com sucesso!");
+            return "redirect:/notas";
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/notas/novo";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/notas/novo";
+        }
     }
 
     // Sessions
