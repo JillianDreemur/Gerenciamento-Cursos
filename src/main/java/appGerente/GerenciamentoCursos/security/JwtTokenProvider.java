@@ -16,7 +16,7 @@ public class JwtTokenProvider {
     @Value("${jwt.secret:mySecretKey123456789012345678901234567890}")
     private String jwtSecret;
 
-    @Value("${jwt.expiration:86400000}") // 24 horas
+    @Value("${jwt.expiration:86400000}")
     private long jwtExpiration;
 
     private SecretKey getSigningKey() {

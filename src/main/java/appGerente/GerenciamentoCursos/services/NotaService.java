@@ -95,7 +95,7 @@ public class NotaService {
     }
 
     public void deleteById(Long id) {
-        findById(id); // Verifica se existe
+        findById(id);
         notaDAO.deleteById(id);
     }
 }

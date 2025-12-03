@@ -38,7 +38,6 @@ public class UsuarioService {
         if (usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
             throw new RuntimeException("Senha é obrigatória");
         }
-        // Criptografa a senha se ainda não estiver criptografada
         if (!usuario.getSenha().startsWith("$2a$")) {
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         }
@@ -48,18 +47,16 @@ public class UsuarioService {
     public Usuario update(Long id, Usuario usuario) {
         Usuario existing = findById(id);
         usuario.setId(existing.getId());
-        // Se a senha foi alterada, criptografa
         if (usuario.getSenha() != null && !usuario.getSenha().isEmpty() && !usuario.getSenha().startsWith("$2a$")) {
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         } else if (usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
-            // Mantém a senha existente se não foi fornecida
             usuario.setSenha(existing.getSenha());
         }
         return usuarioDAO.save(usuario);
     }
 
     public void deleteById(Long id) {
-        findById(id); // Verifica se existe
+        findById(id);
         usuarioDAO.deleteById(id);
     }
 }

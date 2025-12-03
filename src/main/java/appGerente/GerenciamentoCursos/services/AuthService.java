@@ -25,7 +25,6 @@ public class AuthService {
         Usuario usuario = usuarioDAO.findByLogin(loginRequest.getLogin())
                 .orElseThrow(() -> new RuntimeException("Credenciais inválidas"));
 
-        // Verifica senha com BCrypt ou senha em texto plano (para compatibilidade)
         if (!passwordEncoder.matches(loginRequest.getSenha(), usuario.getSenha()) 
                 && !usuario.getSenha().equals(loginRequest.getSenha())) {
             throw new RuntimeException("Credenciais inválidas");

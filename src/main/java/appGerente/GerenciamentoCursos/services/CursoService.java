@@ -27,17 +27,12 @@ public class CursoService {
                 .orElseThrow(() -> new RuntimeException("Curso não encontrado com id: " + id));
     }
 
-    /**
-     * Formata e valida os dados do curso antes de salvar
-     */
     private void formatarEValidarCurso(Curso curso) {
-        // Validação e formatação do nome
         if (curso.getNome() == null || curso.getNome().trim().isEmpty()) {
             throw new RuntimeException("Nome é obrigatório");
         }
         curso.setNome(FormatadorUtil.formatarNome(curso.getNome()));
 
-        // Validação de data de início
         if (curso.getDataInicio() != null) {
             if (curso.getDataInicio().isBefore(DATA_MINIMA)) {
                 throw new IllegalArgumentException("Data de início não pode ser anterior a 01/01/2010");
@@ -47,7 +42,6 @@ public class CursoService {
             }
         }
 
-        // Validação de data de fim
         if (curso.getDataFim() != null) {
             if (curso.getDataFim().isBefore(DATA_MINIMA)) {
                 throw new IllegalArgumentException("Data de fim não pode ser anterior a 01/01/2010");
@@ -57,14 +51,12 @@ public class CursoService {
             }
         }
 
-        // Validação: data de fim deve ser após data de início
         if (curso.getDataInicio() != null && curso.getDataFim() != null) {
             if (curso.getDataFim().isBefore(curso.getDataInicio())) {
                 throw new IllegalArgumentException("Data de fim deve ser posterior à data de início");
             }
         }
 
-        // Status padrão
         if (curso.getStatus() == null || curso.getStatus().isEmpty()) {
             curso.setStatus("ATIVO");
         }
@@ -83,7 +75,7 @@ public class CursoService {
     }
 
     public void deleteById(Long id) {
-        findById(id); // Verifica se existe
+        findById(id);
         cursoDAO.deleteById(id);
     }
 }

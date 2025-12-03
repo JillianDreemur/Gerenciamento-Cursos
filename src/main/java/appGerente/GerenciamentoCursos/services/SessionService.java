@@ -53,7 +53,7 @@ public class SessionService {
     }
 
     public void deleteById(Long id) {
-        findById(id); // Verifica se existe
+        findById(id);
         sessionDAO.deleteById(id);
     }
 }

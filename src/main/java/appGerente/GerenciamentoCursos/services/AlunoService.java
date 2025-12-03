@@ -23,29 +23,22 @@ public class AlunoService {
                 .orElseThrow(() -> new RuntimeException("Aluno não encontrado com id: " + id));
     }
 
-    /**
-     * Formata e valida os dados do aluno antes de salvar
-     */
     private void formatarEValidarAluno(Aluno aluno) {
-        // Validação e formatação do nome
         if (aluno.getNome() == null || aluno.getNome().trim().isEmpty()) {
             throw new RuntimeException("Nome é obrigatório");
         }
         aluno.setNome(FormatadorUtil.formatarNome(aluno.getNome()));
 
-        // Validação e formatação do email
         if (aluno.getEmail() != null && !aluno.getEmail().trim().isEmpty()) {
             FormatadorUtil.validarEmailGmail(aluno.getEmail());
             aluno.setEmail(aluno.getEmail().toLowerCase().trim());
         }
 
-        // Validação e formatação do CPF
         if (aluno.getCpf() == null || aluno.getCpf().trim().isEmpty()) {
             throw new RuntimeException("CPF é obrigatório");
         }
         aluno.setCpf(FormatadorUtil.formatarCPF(aluno.getCpf()));
 
-        // Formatação do telefone (se fornecido)
         if (aluno.getTelefone() != null && !aluno.getTelefone().trim().isEmpty()) {
             aluno.setTelefone(FormatadorUtil.formatarTelefone(aluno.getTelefone()));
         }
@@ -64,7 +57,7 @@ public class AlunoService {
     }
 
     public void deleteById(Long id) {
-        findById(id); // Verifica se existe
+        findById(id);
         alunoDAO.deleteById(id);
     }
 }
