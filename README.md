@@ -1,6 +1,7 @@
 # Sistema de Gerenciamento de Cursos
 
 Sistema completo de gerenciamento de cursos desenvolvido com Spring Boot, incluindo API REST e interface web com Thymeleaf.
+Rodando atualmente em: https://gerenciamento-cursos-production.up.railway.app/login
 
 ## 📋 Requisitos Implementados
 
